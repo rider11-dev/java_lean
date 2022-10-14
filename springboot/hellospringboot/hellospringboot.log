@@ -1,0 +1,31 @@
+2022-10-10 02:45:21 [restartedMain] INFO  rider11.hellospringboot.HellospringbootApplication - Starting HellospringbootApplication using Java 1.8.0_341 on LAPTOP-5HP8AI6I with PID 27820 (D:\learn\java_learn\springboot\hellospringboot\target\classes started by Administrator in D:\learn\java_learn\springboot\hellospringboot)
+2022-10-10 02:45:21 [restartedMain] DEBUG rider11.hellospringboot.HellospringbootApplication - Running with Spring Boot v2.5.8, Spring v5.3.14
+2022-10-10 02:45:21 [restartedMain] INFO  rider11.hellospringboot.HellospringbootApplication - The following profiles are active: dev
+2022-10-10 02:45:21 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-10-10 02:45:21 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-10-10 02:45:21 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-10-10 02:45:21 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-10-10 02:45:21 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 326 ms
+2022-10-10 02:45:21 [restartedMain] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2022-10-10 02:45:21 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-10-10 02:45:21 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-10-10 02:45:21 [restartedMain] INFO  rider11.hellospringboot.HellospringbootApplication - Started HellospringbootApplication in 0.52 seconds (JVM running for 3753.094)
+2022-10-10 02:45:21 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2022-10-10 02:45:42 [http-nio-8081-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-10-10 02:45:42 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-10-10 02:45:42 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2022-10-10 02:45:42 [http-nio-8081-exec-1] DEBUG r.hellospringboot.controller.ConfigController - 调用/user
+2022-10-10 02:46:00 [restartedMain] INFO  rider11.hellospringboot.HellospringbootApplication - Starting HellospringbootApplication using Java 1.8.0_341 on LAPTOP-5HP8AI6I with PID 43532 (D:\learn\java_learn\springboot\hellospringboot\target\classes started by Administrator in D:\learn\java_learn\springboot\hellospringboot)
+2022-10-10 02:46:00 [restartedMain] DEBUG rider11.hellospringboot.HellospringbootApplication - Running with Spring Boot v2.5.8, Spring v5.3.14
+2022-10-10 02:46:00 [restartedMain] INFO  rider11.hellospringboot.HellospringbootApplication - The following profiles are active: dev
+2022-10-10 02:46:00 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-10-10 02:46:00 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-10-10 02:46:04 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-10-10 02:46:04 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-10-10 02:46:04 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-10-10 02:46:04 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-10-10 02:46:04 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3912 ms
+2022-10-10 02:46:05 [restartedMain] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2022-10-10 02:46:05 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-10-10 02:46:05 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-10-10 02:46:05 [restartedMain] INFO  rider11.hellospringboot.HellospringbootApplication - Started HellospringbootApplication in 5.451 seconds (JVM running for 6.282)

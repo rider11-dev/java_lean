@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+     <context:component-scan base-package="aop"></context:component-scan>
+     <!--根据切面中信息创建代理对象-->
+     <!-- 定义切面：环绕增强 -->
+     <bean id="orderPointcutAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+          <property name="patterns" value="aop.dao.OrderDao.add.*,aop.dao.OrderDao.delete.*"/>
+          <property name="advice" ref="aroundAdvice"/>
+     </bean>
+     <!-- 定义切面：前置增强 -->
+     <bean id="userPointcutAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+          <property name="patterns" value="aop.dao.UserDao.add,aop.dao.UserDao.get"/>
+          <property name="advice" ref="beforeAdvice"/>
+     </bean>
+     <!-- 定义切面：异常增强 -->
+     <bean id="exceptionAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+          <property name="patterns" value="aop.dao.*"/>
+          <property name="advice" ref="exceptionAdvice"/>
+     </bean>
+
+     <!-- spring自动代理：根据切面定义中的信息创建代理对象 -->
+     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+</beans>

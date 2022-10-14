@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate:
+      on-profile:
+      - dev-ext
+# 日志
+logging:
+  level:
+    rider11: debug
+    com.rider11: debug
+  file:
+    path: logs/dev
+
+# apollo配置中心
+env: dev
+apollo:
+  meta: http://39.98.214.1:8080
+ 
+# 自定义配置
+self:
+  user:
+    name: rider11-dev
+    age: 32
+    hobits: [篮球,书,电影]
+
+hellostarter:
+  enable: true
+  sayWhat: 你好
+  toWho: 十一

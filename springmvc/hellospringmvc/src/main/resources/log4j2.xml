@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 日志级别优先顺序：OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!-- configuration 后面的status 用于设置log4j2自身内部的信息输出，
+     当设置为trace时,可以看到log4j2内部详细信息输出-->
+<configuration status="warn">
+    <!--
+    集中配置属性进行管理
+    使用时通过:${name}
+    -->
+    <properties>
+        <property name="LOG_HOME">./logs</property>
+        <!-- 格式化输出：
+        %date / %d  表示日期;  %thread / %t 表示线程名;
+        %logger{36} / %l  表示Logger名字最长36个字符;
+        %msg / %m 表示日志消息;  %n是换行符;
+        %-5level   级别从左显示5个字符宽度;
+        -->
+        <property name="LOG_CONSOLE_OUT">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%-5level] %l{36} - %m%n</property>
+        <property name="LOG_FILE_OUT">%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36} - %msg%n
+        </property>
+    </properties>
+
+    <!-- 日志处理 -->
+    <appenders>
+        <!-- 1.控制台输出   SYSTEM_OUT 输出黑色，SYSTEM_ERR输出红色 -->
+        <console name="console" target="SYSTEM_OUT">
+            <!-- 文件输出格式-->
+            <PatternLayout charset="GBK" pattern="${LOG_CONSOLE_OUT}"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+
+        <!-- 2.文件输出-->
+        <!-- 文件输出还可以配置  File、RandomAccessFile、RollingFile、RollingRandomAccessFile 等节点 实现不同要求的文件输出 -->
+        <!-- fileName：文件拆分前的名称-->
+        <!-- filePattern：文件拆分后的名称，满足拆分条件 进行拆分-->
+        <RollingRandomAccessFile name="rollingRandomAccessFile" fileName="${LOG_HOME}/hellospringmvc_now.log" filePattern="${LOG_HOME}/$${date:yyyyMMdd}/%d{yyyyMMdd_HH}.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_FILE_OUT}"/>
+
+            <!-- 日志级别过滤器  info (上) > debug (下)-->
+            <!-- onMatch="ACCEPT" 表示匹配该级别及以上 onMatch="DENY" 表示不匹配该级别及以上 onMatch="NEUTRAL" 表示该级别及以上的，由下一个filter处理，如果当前是最后一个，则表示匹配该级别及以上 onMismatch="ACCEPT" 表示匹配该级别以下 onMismatch="NEUTRAL" 表示该级别及以下的，由下一个filter处理，如果当前是最后一个，则不匹配该级别以下的 onMismatch="DENY" 表示不匹配该级别以下的
+            -->
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+
+            <!-- 文件拆分条件：满足拆分条件，则新建空文件，把已有文件内容存放到 filePattern 配置的地址中-->
+            <Policies>
+                <!-- 按照时间节点拆分，规则根据filePattern定义的 -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- 按照文件大小拆分，10MB -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <!-- 每启动一次系统，则生成一个新的日志文件 -->
+                <!-- OnStartupTriggeringPolicy/>-->
+            </Policies>
+        </RollingRandomAccessFile>
+        <!-- 异步appender -->
+        <Async name="fileAsync">
+            <AppenderRef ref="rollingRandomAccessFile"/>
+        </Async>
+        <Async name="consoleAsync">
+            <AppenderRef ref="console"/>
+        </Async>
+    </appenders>
+
+    <!-- loggers 定义 -->
+    <Loggers>
+        <!--appenders 定义的子节点，只有在 logggers 中使用 AppenderRef 进行引用之后才会生效-->
+        <root level="debug">
+            <!-- <AppenderRef ref="console"/> -->
+            <!-- <AppenderRef ref="rollingRandomAccessFile"/> -->
+            <AppenderRef ref="consoleAsync"/>
+            <AppenderRef ref="fileAsync"/>
+        </root>
+        <!-- 为指定包 设置日志级别 , JdbcTemplate  打印sql语句-->
+        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG">
+            <!-- 如果定义了AppenderRef
+                 则该日志信息只在配置的AppenderRef中生效，
+                 否则继承root下的全部AppenderRef -->
+            <!-- <AppenderRef ref="rollingRandomAccessFile"/> -->
+            <AppenderRef ref="fileAsync"/>
+        </logger>
+    </Loggers>
+</configuration>

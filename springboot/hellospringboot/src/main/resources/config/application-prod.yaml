@@ -1,0 +1,12 @@
+logging:
+  level:
+    rider11: info
+  file:
+    path: logs/prod
+
+# 自定义配置
+self:
+  user:
+    name: rider11-prod
+    age: 32
+    hobits: [篮球,书,电影]

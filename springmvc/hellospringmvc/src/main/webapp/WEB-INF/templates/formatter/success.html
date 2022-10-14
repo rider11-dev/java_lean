@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>rider11</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>名称：</td>
+            <td th:text="${market.getName()}"></td>
+        </tr>
+        <tr>
+            <td>收入：</td>
+            <td th:text="${market.getMoney()}"></td>
+        </tr>
+        <tr>
+            <td>日期：</td>
+            <td th:text="${#dates.format(market.getDate(),'yyyy-MM-dd')}"></td>
+        </tr>
+    </table>
+</body>
+
+</html>

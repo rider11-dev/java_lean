@@ -1,0 +1,21 @@
+spring:
+  redis:
+    client-name: ${spring.application.name}
+    host: 127.0.0.1
+    port: 6379
+    # username: 
+    # password: 
+    database: 0
+    timeout: 1000 # 连接超时时间（毫秒）
+    lettuce: # 默认使用lettuce
+      pool:
+        max-active: 32 #
+        max-idle: 16
+        min-idle: 8
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    # jedis:
+    #   pool:
+    #     max-active: 32
+    #     max-idle: 16
+    #     min-idle: 8
+    #     max-wait: -1

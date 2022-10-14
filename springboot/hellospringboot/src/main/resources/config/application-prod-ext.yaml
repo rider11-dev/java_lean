@@ -1,0 +1,22 @@
+spring:
+  config:
+    activate:
+      on-profile:
+      - prod-ext
+logging:
+  level:
+    rider11: info
+  file:
+    path: logs/prod
+
+# apollo配置中心
+env: prod
+apollo:
+  meta: http://192.168.0.88:8082
+
+# 自定义配置
+self:
+  user:
+    name: rider11-prod
+    age: 32
+    hobits: [篮球,书,电影]

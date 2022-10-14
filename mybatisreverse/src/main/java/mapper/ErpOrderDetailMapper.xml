@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ErpOrderDetailMapper">
+  <resultMap id="BaseResultMap" type="pojo.ErpOrderDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="order_id" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="DOUBLE" property="num" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="goods_type" jdbcType="VARCHAR" property="goods_type" />
+    <result column="purchase_price" jdbcType="INTEGER" property="purchase_price" />
+    <result column="sale_price" jdbcType="INTEGER" property="sale_price" />
+    <result column="goods_plu" jdbcType="VARCHAR" property="goods_plu" />
+    <result column="tare_weight" jdbcType="DOUBLE" property="tare_weight" />
+    <result column="is_gift" jdbcType="BIT" property="is_gift" />
+    <result column="sub_price" jdbcType="INTEGER" property="sub_price" />
+    <result column="parent_id" jdbcType="BIGINT" property="parent_id" />
+    <result column="erp_order_no" jdbcType="VARCHAR" property="erp_order_no" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from erp_order_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ErpOrderDetail">
+    insert into erp_order_detail (id, order_id, category, 
+      barcode, name, num, 
+      unit, goods_type, purchase_price, 
+      sale_price, goods_plu, tare_weight, 
+      is_gift, sub_price, parent_id, 
+      erp_order_no)
+    values (#{id,jdbcType=BIGINT}, #{order_id,jdbcType=BIGINT}, #{category,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=DOUBLE}, 
+      #{unit,jdbcType=VARCHAR}, #{goods_type,jdbcType=VARCHAR}, #{purchase_price,jdbcType=INTEGER}, 
+      #{sale_price,jdbcType=INTEGER}, #{goods_plu,jdbcType=VARCHAR}, #{tare_weight,jdbcType=DOUBLE}, 
+      #{is_gift,jdbcType=BIT}, #{sub_price,jdbcType=INTEGER}, #{parent_id,jdbcType=BIGINT}, 
+      #{erp_order_no,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ErpOrderDetail">
+    update erp_order_detail
+    set order_id = #{order_id,jdbcType=BIGINT},
+      category = #{category,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=DOUBLE},
+      unit = #{unit,jdbcType=VARCHAR},
+      goods_type = #{goods_type,jdbcType=VARCHAR},
+      purchase_price = #{purchase_price,jdbcType=INTEGER},
+      sale_price = #{sale_price,jdbcType=INTEGER},
+      goods_plu = #{goods_plu,jdbcType=VARCHAR},
+      tare_weight = #{tare_weight,jdbcType=DOUBLE},
+      is_gift = #{is_gift,jdbcType=BIT},
+      sub_price = #{sub_price,jdbcType=INTEGER},
+      parent_id = #{parent_id,jdbcType=BIGINT},
+      erp_order_no = #{erp_order_no,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, order_id, category, barcode, name, num, unit, goods_type, purchase_price, 
+    sale_price, goods_plu, tare_weight, is_gift, sub_price, parent_id, erp_order_no
+    from erp_order_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_id, category, barcode, name, num, unit, goods_type, purchase_price, 
+    sale_price, goods_plu, tare_weight, is_gift, sub_price, parent_id, erp_order_no
+    from erp_order_detail
+  </select>
+</mapper>

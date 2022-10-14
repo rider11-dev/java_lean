@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>rider11</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>用户名：</td>
+        <td th:text="${user.getUserName()}"></td>
+    </tr>
+    <tr>
+        <td>生日：</td>
+        <td th:text="${#dates.format(user.getBirth(),'yyyy-MM-dd')}"></td>
+    </tr>
+    <tr>
+        <td>身高：</td>
+        <td th:text="${user.getHeight()}"></td>
+    </tr>
+</table>
+</body>
+</html>

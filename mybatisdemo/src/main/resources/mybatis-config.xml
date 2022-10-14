@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- <property name="dialect" value="mysql"/> -->
+            <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+            <property name="reasonable" value="true"/>
+            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+            <property name="pageSizeZero" value="true"/>
+            <property name="offsetAsPageNum" value="false"/>
+            <property name="rowBoundsWithCount" value="false"/>
+        </plugin>
+    </plugins>
+    <!-- 配置mybatis运行环境 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用JDBC的事务管理 -->
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <!-- MySQL数据库驱动 -->
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <!-- 连接数据库的URL -->
+                <property name="url" value="jdbc:mysql://localhost:3307/mybatis?characterEncoding=utf8" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 将mapper文件加入到配置文件中 -->
+    <mappers>
+        <mapper resource="mapper/WebsiteMapper.xml" />
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,12 @@
+spring:
+  config:
+    activate:
+      on-profile:
+      - prod-data
+# JDBC通用配置
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3307/hellospring    
+    desc: prod
+   

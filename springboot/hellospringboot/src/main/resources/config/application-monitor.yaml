@@ -1,0 +1,15 @@
+# 监控配置:actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 打开所有监控端点
+      base-path: /monitor # 自定义监控路径,默认/actuator/*
+  endpoint:
+    health:
+      show-details: always # 显示健康检查详细信息
+    shutdown:
+      enabled: true # 通过指定接口关闭springboot
+  metrics:
+      tags:
+        application: ${spring.application.name}

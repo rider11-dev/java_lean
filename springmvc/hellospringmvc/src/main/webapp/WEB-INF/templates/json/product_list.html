@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入 jquery-->
+    <script type="text/javaScript" src="../../js/jquery-3.6.0.min.js " th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</head>
+
+<body>
+    <table th:border="1" th:cellspacing="0" th:cellpadding="0" style="text-align: center;">
+        <thead>
+            <th>商品id</th>
+            <th>商品名</th>
+            <th>商品价格</th>
+            <th>商品库存</th>
+            <th>操作</th>
+        </thead>
+        <tbody th:id="tb">
+        </tbody>
+    </table>
+    <br>
+    <!-- 作用：通过超链接控制表单的提交，将post请求转换为delete请求 -->
+    <form id="delete_form" method="post" th:action="@{/json/product}">
+        <!-- HiddenHttpMethodFilter要求：必须传输_method请求参数，并且值为最终的请求方式 -->
+        <input type="hidden" name="_method" value="delete" />
+        <input type="hidden" name="productId" th:id="form-id" />
+    </form>
+    <button id="btn">新增商品</button>
+    <div id="addWindow">
+        <label id="x" style="position: absolute;top:2px;left: 95%;font-size: 25px;">x</label>
+        <h4>新增商品</h4>
+        <form th:action="@{/json/product}" method="post">
+            <table id="table-box" style="margin: auto">
+                <tr>
+                    <td>商品 ID：</td>
+                    <td><input type="text" id="productId" name="productId" required></td>
+                </tr>
+                <tr>
+                    <td>商品名称：</td>
+                    <td><input type="text" id="productName" name="productName" required></td>
+                </tr>
+                <tr>
+                    <td>商品价格：</td>
+                    <td><input type="text" id="price" name="price" required></td>
+                </tr>
+                <tr>
+                    <td>商品库存：</td>
+                    <td><input type="text" id="stock" name="stock" required></td>
+                </tr>
+                <tr>
+                    <td>商品简介：</td>
+                    <td><textarea id="introduction" name="introduction" rows="10" cols="30"></textarea><br></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input id="addPro" type="submit" value="新增商品">
+                        <input type="reset" id="reset" value="重置">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="backGround"></div>
+    <div id="editWindow">
+        <label id="ex" style="position: absolute;top:2px;left: 95%;font-size: 25px;">x</label>
+        <h4>修改商品</h4>
+        <form th:action="@{/json/product/edit}" id="edit-form" method="post">
+            <table id="edit-form-table" style="margin: auto">
+                <tr>
+                    <td>商品 ID：</td>
+                    <td><input id="e-productId" type="text" name="productId" readonly></td>
+                </tr>
+                <tr>
+                    <td>商品名称：</td>
+                    <td><input id="e-productName" type="text" name="productName" required></td>
+                </tr>
+                <tr>
+                    <td>商品价格：</td>
+                    <td><input id="e-price" type="text" name="price" required></td>
+                </tr>
+                <tr>
+                    <td>商品库存：</td>
+                    <td><input id="e-stock" type="text" name="stock" required></td>
+                </tr>
+                <tr>
+                    <td>商品简介：</td>
+                    <td><textarea id="e-introduction" name="introduction" rows="10" cols="30"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="修改商品信息"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="edit-backGround"></div>
+    <div id="lookWindow">
+        <label id="lx" style="position: absolute;top:2px;left: 95%;font-size: 25px;">x</label>
+        <h4>商品详情</h4>
+        <table style="margin: auto">
+            <tr>
+                <td>商品 ID：</td>
+                <td id="l-productId"></td>
+            </tr>
+            <tr>
+                <td>商品名称：</td>
+                <td id="l-productName"></td>
+            </tr>
+            <tr>
+                <td>商品价格：</td>
+                <td id="l-price"></td>
+            </tr>
+            <tr>
+                <td>商品库存：</td>
+                <td id="l-stock"></td>
+            </tr>
+            <tr>
+                <td>商品简介：</td>
+                <td id="l-introduction"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="look-backGround"></div>
+    <script type="text/javaScript">
+    $(document).ready(function () {
+        //点击新增商品，弹出新增商品弹窗
+        $("#btn").click(function () {
+            $("#addWindow").slideDown(300);
+            $("#backGround").show();
+        });
+        $("#x").click(function () {
+            $("#addWindow").slideUp(300);
+            $("#backGround").hide();
+            $("#reset").trigger("click")
+        });
+        $("#ex").click(function () {
+            $("#editWindow").slideUp(300);
+            $("#edit-backGround").hide();
+        });
+        $("#lx").click(function () {
+            $("#lookWindow").slideUp(300);
+            $("#look-backGround").hide();
+        });
+        $("#look-close").click(function () {
+            $("#lookWindow").slideUp(300);
+            $("#look-backGround").hide();
+        });
+        /**
+         * 填完数据后，点击新增商品弹窗中的 新增商品 按钮，执行新增商品操作
+         */
+        $("#addPro").click(function () {
+            add();
+            $("#addWindow").slideUp(300);
+            $("#backGround").hide();
+            $("#reset").trigger("click")
+        });
+        $("#editPro").click(function () {
+            $("#edit-form").submit();
+            $("#editWindow").slideUp(300);
+            $("#edit-backGround").hide();
+            $("#e-reset").trigger("click")
+        });
+    });
+    $(function () {
+        $.ajax({
+            //请求路径
+            url: "http://host:8889/hellospringmvc/json/product/getProductList",
+            //请求类型
+            type: "get",
+            //定义发送请求的数据格式为JSON字符串
+            contentType: "application/json;charset=utf-8",
+            //定义回调响应的数据格式为JSON字符串，该属性可以省略
+            dataType: "json",
+            //成功响应的结果
+            success: function (data) {
+                if (data != null) {
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var product = data[i];
+                        html += "<tr>" +
+                            "<td>" + product.productId + "</td>" +
+                            "<td>" + product.productName + "</td>" +
+                            "<td>" + product.price + "</td>" +
+                            "<td>" + product.stock + "</td>" +
+                            "<td><button  onclick='lookPage(" + product.productId + ")'>查看商品</button>" +
+                            "<button  onclick='editPage(" + product.productId + ")';>修改商品</button>" +
+                            "<button  onclick='deletePro(" + product.productId + ")';>删除商品</button></td>" +
+                            "</tr>"
+                    }
+                    $("#tb").html(html);
+                }
+            }
+        });
+    })
+    function deletePro(productId) {
+        var b = confirm("确认删除id 为" + productId + " 的商品？");
+        if (b) {
+            var delete_form = $("#delete_form");
+            $("#form-id").val(productId);
+            delete_form.submit();
+        }
+    }
+    //执行新增商品操作
+    function add() {
+        var productId = $("#productId").val();
+        var productName = $("#productName").val();
+        var price = $("#price").val();
+        var introduction = $("#introduction").val();
+        var stock = $("#stock").val();
+        $.ajax({
+            //请求路径
+            url: "http://host:8889/hellospringmvc/json/product/add",
+            //请求类型
+            type: "post",
+            data: JSON.stringify({
+                productId: productId,
+                productName: productName,
+                price: price,
+                stock: stock,
+                introduction: introduction
+            }), //定义发送请求的数据格式为JSON字符串
+            contentType: "application/json;charset=utf-8",
+            //定义回调响应的数据格式为JSON字符串，该属性可以省略
+            dataType: "json",
+            //成功响应的结果
+            success: function (data) {
+                if (data != null) {
+                    var product = data;
+                    var html = "<tr>" +
+                        "<td>" + product.productId + "</td>" +
+                        "<td>" + product.productName + "</td>" +
+                        "<td>" + product.price + "</td>" +
+                        "<td>" + product.stock + "</td>" +
+                        "<td><button onclick='lookPage(" + product.productId + ")'>查看商品</a>" +
+                        "<button onclick='editPage(" + product.productId + ")';>修改商品</a>" +
+                        "<button onclick='deletePro(" + product.productId + ")';>删除商品</a></td>" +
+                        "</tr>";
+                    $("#tb").append(html);
+                }
+            }
+        });
+    }
+    function lookPage(productId) {
+        $("#lookWindow").slideDown(300);
+        $("#look-backGround").show();
+        $.ajax({
+            //请求路径
+            url: "http://host:8889/hellospringmvc/json/product/get/" + productId,
+            //请求类型
+            type: "get",
+            //定义发送请求的数据格式为JSON字符串
+            contentType: "application/json;charset=utf-8",
+            //定义回调响应的数据格式为JSON字符串，该属性可以省略
+            dataType: "json",
+            //成功响应的结果
+            success: function (data) {
+                if (data != null) {
+                    $("#l-productId").html(data.productId);
+                    $("#l-productName").html(data.productName);
+                    $("#l-price").html(data.price);
+                    $("#l-stock").html(data.stock);
+                    $("#l-introduction").html(data.introduction);
+                }
+            }
+        });
+    }
+    // 打开商品修改页，并将商品信息回显到弹窗中
+    function editPage(productId) {
+        $("#editWindow").slideDown(300);
+        $("#edit-backGround").show();
+        $.ajax({
+            //请求路径
+            url: "http://host:8889/hellospringmvc/json/product/get/" + productId,
+            //请求类型
+            type: "get",
+            //定义发送请求的数据格式为JSON字符串
+            contentType: "application/json;charset=utf-8",
+            //定义回调响应的数据格式为JSON字符串，该属性可以省略
+            dataType: "json",
+            //成功响应的结果
+            success: function (data) {
+                if (data != null) {
+                    var product = data;
+                    $("#e-productId").val(data.productId);
+                    $("#e-productName").val(data.productName);
+                    $("#e-price").val(data.price);
+                    $("#e-stock").val(data.stock);
+                    $("#e-introduction").val(data.introduction);
+                }
+            }
+        });
+    }
+</script>
+    <style type="text/css">
+        #addWindow,
+        #editWindow {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 30%;
+            height: 40%;
+            padding: 20px;
+            border: 3px solid #ccc;
+            background-color: white;
+            z-index: 2;
+            overflow: auto;
+        }
+
+        #lookWindow {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 30%;
+            height: 30%;
+            padding: 20px;
+            border: 3px solid #ccc;
+            background-color: white;
+            z-index: 2;
+            overflow: auto;
+        }
+
+        #backGround,
+        #edit-backGround,
+        #look-backGround {
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 1100px;
+            background-color: black;
+            z-index: 1;
+            -moz-opacity: 0.8;
+            opacity: .80;
+            filter: alpha(opacity=88);
+        }
+
+        #x:hover,
+        #lx:hover,
+        #ex:hover {
+            cursor: pointer;
+            color: rgb(55, 198, 192);
+        }
+    </style>
+</body>
+
+</html>

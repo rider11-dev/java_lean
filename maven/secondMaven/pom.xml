@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>rider12</groupId>
+  <artifactId>secondMaven</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>secondMaven</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>rider11</groupId>
+      <artifactId>helloMaven</artifactId>
+      <!-- 必须是system -->
+      <scope>system</scope>
+      <version>1.0-SNAPSHOT</version>
+      <systemPath>D:/learn/java_learn/maven/helloMaven/target/helloMaven-1.0-SNAPSHOT.jar</systemPath>
+    </dependency>
+    <!-- <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-site-plugin</artifactId>
+      <version>3.7.1</version>
+      <type>maven-plugin</type>
+    </dependency> -->
+  </dependencies>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+  </properties>
+</project>
+<!-- $env:classpath+=";D:/learn/java_learn/maven/helloMaven/target/helloMaven-1.0-SNAPSHOT.jar" -->
+<!-- $env:classpath+=";D:/learn/java_learn/maven/secondMaven/target/secondMaven-1.0-SNAPSHOT.jar" -->
+<!-- set classpath=%classpath%;D:/learn/java_learn/maven/helloMaven/target/helloMaven-1.0-SNAPSHOT.jar -->

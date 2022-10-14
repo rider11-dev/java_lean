@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>rider11</title>
+    <script type="text/javaScript" src="../../js/jquery-3.6.0.min.js " th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</head>
+
+<body>
+    <h1 th:text="'欢迎您：'+${session.loginUser.getUserName()}" th:if="${not #strings.isEmpty(session.loginUser)}"></h1>
+    <table th:border="1" th:cellspacing="0" th:cellpadding="10" style="text-align: center;">
+        <thead>
+            <th>商品id</th>
+            <th>商品名</th>
+            <th>商品价格</th>
+            <th>商品库存</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+            <tr th:each="product:${products}">
+                <td th:text="${product.getProductId()}"></td>
+                <td th:text="${product.getProductName()}"></td>
+                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.getStock()}"></td>
+                <td>
+                    <a th:href="@{|/rest/product/get/${product.getProductId()}|}">查看商品</a>
+                    <a th:href="@{|/rest/product/update/${product.getProductId()}|}">修改商品</a>
+                    <!-- <a href="#" th:onclick="testJson1([[${product.getProductId()}]]);">删除商品</a> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a th:href="@{/rest/addPage}">新增商品</a>
+    <!-- 作用：通过超链接控制表单的提交，将post请求转换为delete请求 -->
+    <form id="delete_form" method="post" th:action="@{/rest/product}">
+        <!-- HiddenHttpMethodFilter要求：必须传输_method请求参数，并且值为最终的请求方式 -->
+        <input type="hidden" name="_method" value="delete" />
+        <input type="hidden" name="productId" th:id="form-id" />
+    </form>
+    <script type="text/javaScript" th:inline="none">
+    function testJson1(productId) {
+        var b = confirm("确认删除id 为" + productId + " 的商品？");
+        if (b) {
+            var delete_form = $("#delete_form");
+            $("#form-id").val(productId);
+            delete_form.submit();
+        }
+    }
+    </script>
+</body>
+
+</html>

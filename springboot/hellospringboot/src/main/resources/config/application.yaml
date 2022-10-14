@@ -1,0 +1,46 @@
+# spring boot配置
+server:
+  port: 8081
+
+# 指定环境
+spring:
+  application:
+    name: hellospringboot
+  profiles:
+    active:
+    - dev
+    # - prod
+    group:
+      "dev": "monitor,data,jackson,dev-data,dev-ext,dev-redis,dev-rabbitmq,rabbitmq,mqtt,dev-mqtt"
+      "prod": "monitor,data,jackson,prod-jackson,prod-data,prod-ext,prod-redis,prod-rabbitmq,rabbitmq,mqtt,prod-mqtt"
+  # 统一aop代理方式,解决错误：The mapped handler method class XXXX is not an instance of the actual endpoint bean class XXXX
+  aop:
+    auto: false #关闭自动代理
+    proxy-target-class: true #true:开启CGLiib代理（基于类的代理）,false:默认使用Jdk基于接口的代理
+
+# 日志配置
+logging:
+  charset:
+    file: utf8
+  level:
+    rider11: info
+  file:
+    path: logs
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  
+# apollo配置中心
+# env: dev
+app:
+  id: payfun.aiot.http
+apollo:
+  cacheDir: apollo
+  # cluster: default
+  meta: todo # http://39.98.214.1:8080
+  autoUpdateInjectedSpringProperties: true   #是否开启 Spring 参数自动更新
+  bootstrap: # 启动阶段配置
+    enable: true # 注入默认application namespace的配置
+    namespaces: application,helloapollo.yaml # 注入非默认application namespace或多个namespace的配置
+    eagerLoad:
+      enabled: false #将Apollo加载提到初始化日志系统之前

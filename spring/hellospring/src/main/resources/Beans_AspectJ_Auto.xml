@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd 
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+     <!--开启组件扫描功能-->
+     <context:component-scan base-package="aspectj"></context:component-scan>
+     <!-- 配置切面 -->
+     <!--在 AspectJ 框架中开启注解处理。声明自动为 IOC 容器的那些配置了@AspectJ的切面的 bean 对象创建代理，织入切面。-->
+     <!--默认为 false：false：使用 JDK 的 Proxy 对象创建代理对象。true：使用CGLIB 创建代理对象。如果目标对象实现了接口会使用 Proxy，如果目标对象没有实现接口则自动使用 CGLIB 创建代理对象。-->
+     <!-- <aop:aspectj-autoproxy proxy-target-class="false"/> -->
+     <aop:aspectj-autoproxy/>
+</beans>

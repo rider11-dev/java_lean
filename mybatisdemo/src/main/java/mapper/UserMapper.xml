@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+
+    <resultMap type="po.User" id="userAndOrder">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="pwd" column="pwd"/>
+        <!-- 一对多级联查询，ofType表示集合中的元素类型 -->
+        <collection property="orderList" ofType="po.Order">
+            <id property="oId" column="oId"/>
+            <result property="ordernum" column="ordernum"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectUserOrderById" resultMap="userAndOrder" parameterType="Integer">
+        select u.* ,o.id as oId,o.ordernum
+        from `user` u,`order` o
+        where u.id=o.`userId` and u.id=#{id}
+    </select>
+
+    <insert id="insertOne" parameterType="po.User" keyProperty="id" useGeneratedKeys="true">
+        insert into user(name,pwd) values(#{name},#{pwd})
+    </insert>
+    <insert id="insertMulti">
+        insert into user(name,pwd) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.name},#{item.pwd})
+        </foreach>
+    </insert>
+</mapper>

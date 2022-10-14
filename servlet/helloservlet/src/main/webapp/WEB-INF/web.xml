@@ -1,0 +1,73 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <!-- 注册servlet -->
+  <servlet>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>HelloServlet</servlet-class>
+  </servlet>
+  <!-- servlet请求路径 -->
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <!-- 测试虚拟路径匹配 -->
+  <servlet>
+    <servlet-name>VPath1</servlet-name>
+    <servlet-class>VPathServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>VPath2</servlet-name>
+    <servlet-class>VPathServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>VPath3</servlet-name>
+    <servlet-class>VPathServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>VPath4</servlet-name>
+    <servlet-class>VPathServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>VPath5</servlet-name>
+    <servlet-class>VPathServlet</servlet-class>
+  </servlet>
+  <!-- 完全路径匹配 -->
+  <servlet-mapping>
+    <servlet-name>VPath1</servlet-name>
+    <url-pattern>/vpath</url-pattern>
+  </servlet-mapping>
+  <!-- 目录匹配 -->
+  <servlet-mapping>
+    <servlet-name>VPath2</servlet-name>
+    <url-pattern>/vpath/2/*</url-pattern>
+  </servlet-mapping>
+  <!-- 扩展名匹配 -->
+  <servlet-mapping>
+    <servlet-name>VPath3</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <!-- 过滤器测试 -->
+  <filter>
+    <filter-name>FirstFilter</filter-name>
+    <filter-class>filterdemo.FirstFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FirstFilter</filter-name>
+    <url-pattern>/filter/demo</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>SecondFilter</filter-name>
+    <filter-class>filterdemo.SecondFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SecondFilter</filter-name>
+    <url-pattern>/filter/demo</url-pattern>
+  </filter-mapping>
+</web-app>

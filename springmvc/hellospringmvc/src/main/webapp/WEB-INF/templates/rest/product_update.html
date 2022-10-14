@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <form th:action="@{/rest/product/update}" method="post">
+        <input type="hidden" name="_method" value="put">
+        <table style="margin: auto">
+            <tr>
+                <td>商品 ID：</td>
+                <td><input type="text" name="productId" th:value="${product.getProductId()}" readonly></td>
+            </tr>
+            <tr>
+                <td>商品名称：</td>
+                <td><input type="text" name="productName" th:value="${product.getProductName()}" required></td>
+            </tr>
+            <tr>
+                <td>商品价格：</td>
+                <td><input type="text" name="price" th:value="${product.getPrice()}" required></td>
+            </tr>
+            <tr>
+                <td>商品库存：</td>
+                <td><input type="text" name="stock" th:value="${product.getStock()}" required></td>
+            </tr>
+            <tr>
+                <td>商品简介：</td>
+                <td><textarea name="introduction" rows="10" cols="30" th:text="${product.getIntroduction()}"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="修改商品信息"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

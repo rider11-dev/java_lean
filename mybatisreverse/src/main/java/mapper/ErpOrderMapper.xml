@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ErpOrderMapper">
+  <resultMap id="BaseResultMap" type="pojo.ErpOrder">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="erp_order_no" jdbcType="VARCHAR" property="erp_order_no" />
+    <result column="time_start" jdbcType="TIMESTAMP" property="time_start" />
+    <result column="order_source" jdbcType="VARCHAR" property="order_source" />
+    <result column="order_type" jdbcType="VARCHAR" property="order_type" />
+    <result column="appId" jdbcType="VARCHAR" property="appId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="status_desc" jdbcType="VARCHAR" property="status_desc" />
+    <result column="merchantId" jdbcType="VARCHAR" property="merchantId" />
+    <result column="cashier" jdbcType="VARCHAR" property="cashier" />
+    <result column="total_amt" jdbcType="INTEGER" property="total_amt" />
+    <result column="dis_amt" jdbcType="INTEGER" property="dis_amt" />
+    <result column="real_amt" jdbcType="INTEGER" property="real_amt" />
+    <result column="member" jdbcType="BIT" property="member" />
+    <result column="orig_order_no" jdbcType="VARCHAR" property="orig_order_no" />
+    <result column="reportTime" jdbcType="TIMESTAMP" property="reportTime" />
+    <result column="pp_trade_no" jdbcType="VARCHAR" property="pp_trade_no" />
+    <result column="is_whole_order" jdbcType="BIT" property="is_whole_order" />
+    <result column="member_id" jdbcType="VARCHAR" property="member_id" />
+    <result column="trans_mode" jdbcType="VARCHAR" property="trans_mode" />
+    <result column="orig_erp_order_no" jdbcType="VARCHAR" property="orig_erp_order_no" />
+    <result column="yipay_amt" jdbcType="INTEGER" property="yipay_amt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from erp_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ErpOrder">
+    insert into erp_order (id, erp_order_no, time_start, 
+      order_source, order_type, appId, 
+      status, status_desc, merchantId, 
+      cashier, total_amt, dis_amt, 
+      real_amt, member, orig_order_no, 
+      reportTime, pp_trade_no, is_whole_order, 
+      member_id, trans_mode, orig_erp_order_no, 
+      yipay_amt)
+    values (#{id,jdbcType=BIGINT}, #{erp_order_no,jdbcType=VARCHAR}, #{time_start,jdbcType=TIMESTAMP}, 
+      #{order_source,jdbcType=VARCHAR}, #{order_type,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{status_desc,jdbcType=VARCHAR}, #{merchantId,jdbcType=VARCHAR}, 
+      #{cashier,jdbcType=VARCHAR}, #{total_amt,jdbcType=INTEGER}, #{dis_amt,jdbcType=INTEGER}, 
+      #{real_amt,jdbcType=INTEGER}, #{member,jdbcType=BIT}, #{orig_order_no,jdbcType=VARCHAR}, 
+      #{reportTime,jdbcType=TIMESTAMP}, #{pp_trade_no,jdbcType=VARCHAR}, #{is_whole_order,jdbcType=BIT}, 
+      #{member_id,jdbcType=VARCHAR}, #{trans_mode,jdbcType=VARCHAR}, #{orig_erp_order_no,jdbcType=VARCHAR}, 
+      #{yipay_amt,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ErpOrder">
+    update erp_order
+    set erp_order_no = #{erp_order_no,jdbcType=VARCHAR},
+      time_start = #{time_start,jdbcType=TIMESTAMP},
+      order_source = #{order_source,jdbcType=VARCHAR},
+      order_type = #{order_type,jdbcType=VARCHAR},
+      appId = #{appId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      merchantId = #{merchantId,jdbcType=VARCHAR},
+      cashier = #{cashier,jdbcType=VARCHAR},
+      total_amt = #{total_amt,jdbcType=INTEGER},
+      dis_amt = #{dis_amt,jdbcType=INTEGER},
+      real_amt = #{real_amt,jdbcType=INTEGER},
+      member = #{member,jdbcType=BIT},
+      orig_order_no = #{orig_order_no,jdbcType=VARCHAR},
+      reportTime = #{reportTime,jdbcType=TIMESTAMP},
+      pp_trade_no = #{pp_trade_no,jdbcType=VARCHAR},
+      is_whole_order = #{is_whole_order,jdbcType=BIT},
+      member_id = #{member_id,jdbcType=VARCHAR},
+      trans_mode = #{trans_mode,jdbcType=VARCHAR},
+      orig_erp_order_no = #{orig_erp_order_no,jdbcType=VARCHAR},
+      yipay_amt = #{yipay_amt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, erp_order_no, time_start, order_source, order_type, appId, status, status_desc, 
+    merchantId, cashier, total_amt, dis_amt, real_amt, member, orig_order_no, reportTime, 
+    pp_trade_no, is_whole_order, member_id, trans_mode, orig_erp_order_no, yipay_amt
+    from erp_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, erp_order_no, time_start, order_source, order_type, appId, status, status_desc, 
+    merchantId, cashier, total_amt, dis_amt, real_amt, member, orig_order_no, reportTime, 
+    pp_trade_no, is_whole_order, member_id, trans_mode, orig_erp_order_no, yipay_amt
+    from erp_order
+  </select>
+</mapper>

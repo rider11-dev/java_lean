@@ -1,0 +1,4 @@
+mqtt:
+  host: tcp://localhost:11883
+  username: iot:iot
+  password: iot

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+     xmlns:p="http://www.springframework.org/schema/p">
+     <bean id="helloWorld" class="hellospring.Helloworld">
+          <property name="message" value="你好Spring"/>
+     </bean>
+
+     <bean id="student" class="didemo.Student">
+          <constructor-arg name="id" value="2"/>
+          <constructor-arg name="name" value="李四"/>
+          <constructor-arg name="grade" ref="grade"/>
+     </bean>
+     <bean id="grade" class="didemo.Grade">
+          <constructor-arg name="gradeId" value="4"/>
+          <constructor-arg name="gradeName" value="四年级"/>
+     </bean>
+
+     <bean id="employee" class="didemo.Employee" p:empNo="888" p:empName="小李" p:dept-ref="dept" scope="prototype">
+          <property name="addressList">
+               <list>
+                    <value>山东</value>
+                    <value>广东</value>
+                    <value>浙江</value>
+               </list>
+          </property>
+          <property name="addressSet">
+               <set>
+                    <value>北京</value>
+                    <value>天津</value>
+               </set>
+          </property>
+          <property name="addressMap">
+               <map>
+                    <entry key="1" value="济南"/>
+                    <entry key="2" value="青岛"/>
+               </map>
+          </property>
+     </bean>
+     <bean id="dept" class="didemo.Dept" p:deptNo="1111" p:deptName="技术部"/>
+     <!-- bean继承 -->
+     <bean id="animal" abstract="true">
+          <property name="name" value="动物"/>
+          <property name="age" value="10"/>
+     </bean>
+     <bean id="dog" class="didemo.Dog" parent="animal">
+          <property name="name" value="动物"/>
+          <property name="call" value="汪汪"/>
+     </bean>
+
+     <!-- 自动装配 -->
+     <bean id="deptAuto" class="didemo.DeptAuto">
+          <property name="deptNo" value="1"></property>
+          <property name="deptName" value="技术部"></property>
+     </bean>
+     <!-- <bean id="employeeAuto" class="didemo.EmployeeAuto" autowire="no"> -->
+     <!-- <bean id="employeeAuto" class="didemo.EmployeeAuto" autowire="byName"> -->
+     <bean id="employeeAuto" class="didemo.EmployeeAuto" autowire="byType">
+          <property name="empNo" value="002"></property>
+          <property name="empName" value="小郭"></property>
+          <!-- <property name="dept" ref="dept"></property> -->
+     </bean>
+</beans>
+

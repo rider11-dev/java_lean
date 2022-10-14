@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>rider11</title>
+</head>
+
+<body>
+    <form th:action="@{/user}" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>姓名：</td>
+                <td><input type="text" name="userName" required><br></td>
+            </tr>
+            <tr>
+                <td>生日：</td>
+                <td><input type="date" name="birth" required><br></td>
+            </tr>
+            <tr>
+                <td>身高：</td>
+                <td><input type="text" name="height" required><br></td>
+            </tr>
+            <tr>
+                <td>照片：</td>
+                <td><input type="file" name="photos" multiple="multiple" required><br></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交">
+                    <input type="reset" value="重置">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

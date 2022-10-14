@@ -1,0 +1,8 @@
+mqtt:
+#   host: tcp://localhost:11883
+#   username: iot:iot
+#   password: iot
+  qos: 1
+  clientId: hellospringboot
+  timeout: 10 # 连接超时,单位s
+  keepalive: 20 #   

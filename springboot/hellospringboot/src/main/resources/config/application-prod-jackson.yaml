@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile:
+      - jackson
+      - prod-jackson
+  jackson:    
+    serialization: # 常规默认,枚举类SerializationFeature中的枚举属性为key，值为boolean设置jackson序列化特性,具体key请看SerializationFeature源码
+      INDENT_OUTPUT: false # 格式化输出:false
