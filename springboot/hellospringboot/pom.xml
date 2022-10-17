@@ -25,6 +25,13 @@
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 	</properties>
 	<dependencies>
+		<!-- httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
 		<!-- 使用spring-cloud-context，用来实现Apollo+@ConfigurationProperties注解自动更新 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
