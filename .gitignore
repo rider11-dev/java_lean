@@ -1,2 +1,5 @@
 /springboot/hellospringboot/logs
 /springboot/hellospringboot/apollo
+/*/target
+/*/*/target
+/*/*/*/target
